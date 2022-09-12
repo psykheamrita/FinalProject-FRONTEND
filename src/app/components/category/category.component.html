@@ -1,0 +1,20 @@
+<div>
+  <ul class="list-group list-group-flush">
+    <div><li
+      [class]="getAllCategoryClass()"
+      routerLink='/products'
+    >
+      Tüm Ürünler
+    </li>
+    <li
+      (click)="setCurrentCategory(category)"
+      routerLink="/products/category/{{ category.categoryId }}"
+      *ngFor="let category of categories"
+      [class]="getCurrentCategoryClass(category)"
+    >
+      {{ category.categoryId + "  " + category.categoryName }}
+    </li></div>
+</ul>
+<div><h5 *ngIf="currentCategory">{{ currentCategory.categoryName }} seçtin lan</h5></div>
+</div>
+

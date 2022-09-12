@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="mb-3">
+    <label for="filterText" class="form-label">Product Search</label>
+    <input type="text" [(ngModel)] = "filterText" class="form-control" id="filterText" placeholder="Enter product name">
+  </div>
+  <div *ngIf="filterText.length>3" class="alert alert-warning">
+    {{filterText}} searched
+  </div>
+  <table class="table">
+    <div>
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Unit Price</th>
+        <th>Tax Included Price</th>
+        <th>Units In Stock</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr *ngFor="let product of products | filterPipe:filterText">
+      <td>{{ product.productId }}</td>
+      <td>{{ product.productName | uppercase }}</td>
+      <td>{{ product.categoryId }}</td>
+      <td>{{ product.unitPrice | currency }}</td>
+      <td>{{ product.unitPrice | vatAdded:10 | currency }}</td>
+      <td>{{ product.unitsInStock }}</td>
+      <td><button (click)="addToCart(product)" type="button" class="btn btn-outline-success">Add to Cart</button></td>
+    </tr>
+  </div>
+  </table>
+</div>
